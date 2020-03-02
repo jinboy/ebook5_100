@@ -1,0 +1,6 @@
+<!--矢量图形-->
+<!--通过<t-icon/>上设置图标组件的name属性来指定要使用的图标，name属性必填-->
+<!--<t-icon name="add"/>-->
+<view class="t-class t-self-class t-icon {{name===''?'':'t-icon-'+name}}"
+      style="{{size?'font-size'+size+'rpx;':''}}{{color?'color:'+color+';':''}}">
+</view>

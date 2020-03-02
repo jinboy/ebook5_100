@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "t-segment": "/tab-ui/segment/segment"
+  }
+}

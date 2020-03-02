@@ -1,0 +1,20 @@
+<!--<t-segment-->
+<!--        onGetFromComponents="onGetFromComponents"-->
+<!--        active-key="{{}}"-->
+<!--        height="{{}}"-->
+<!--        item-height="{{}}"-->
+<!--        width="{{}}"-->
+<!--        even="{{}}"-->
+<!--        scrollable-->
+<!--        placement="top">-->
+<!--    <block a:for="{{}}">-->
+<!--        <view key="{{index}}">-->
+<!--            <l-segment-item key="{{item.id}}" tab="{{item.name}}"></l-segment-item>-->
+<!--        </view>-->
+<!--    </block>-->
+<!--    123-->
+<!--</t-segment>-->
+
+
+<t-segment onGetFromComponents="onGetFromComponents">
+</t-segment>

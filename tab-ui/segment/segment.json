@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponent": {
+    "t-icon": "../icon/icon",
+    "t-badge": "../badge/badge",
+    "t-segment-item": "../segment-item/segment-item"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "t-icon": "/tab-ui/icon/icon",
+    "t-badge": "/tab-ui/badge/badge"
+  }
+}
