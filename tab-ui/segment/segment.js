@@ -42,78 +42,111 @@ Component({
         height: Number,
         itemHeight: Number,
         itemWidth: Number,
-        onGetFromComponents: (e) => console.log('e:', e)
-
+        onDataChange: (e) => console.log('onDataChange:', e),
+        onSegmentData: (e) => console.log('onSegmentData', e),
     },
     didMount() {
         this.initTabs();
-        console.log('this.props:', this.props)
+        this._setChangeData();
     },
     didUpdate() {
+        this.initTabs();
+        this._setChangeData();
     },
     didUnmount() {
         this.initTabs();
     },
     methods: {
-        even() {
-            this.props.onGetFromComponents(this.data);
-        },
         /***
          * 初始化Tabs
          * @param val
          */
         initTabs(val = this.data.activeKey) {
             // 获取segment-items
-            let items = [];
-            if (items.length > 0) {
-                if (items.length === this.data.tabList.length) return;
-                let activeKey = val,
-                    currentIndex = this.data.currentIndex;
-                const tab = items.map((item, index) => {
-                        activeKey = !val && index == 0 ? item.data.key : activeKey;
-                        currentIndex = item.data.key === activeKey ? index : currentIndex;
-                        return {
-                            ...item.data
-                        }
-                    }
-                );
-                this.setData({
-                    tabList: tab,
-                    activeKey,
-                    currentIndex
-                }, () => {
-                    if (this.data.scrollable) {
-                        this.queryMultipleNodes();
-                    }
-                });
-
-            }
+            // let items = [
+            //     {
+            //         id: 0,
+            //         key: 0,
+            //         name: '一'
+            //     },
+            //     {
+            //         id: 1,
+            //         key: 1,
+            //         name: '二'
+            //     }
+            // ];// items是segment-items数组，这边每个item是一个组件
+            // if (items.length > 0) {
+            //     if (items.length === this.data.tabList.length) return;
+            //     let activeKey = val,
+            //         currentIndex = this.data.currentIndex;
+            //     // 拼装新数组tab
+            //     const tab = items.map((item, index) => {
+            //             activeKey = !val && index == 0 ? item.data.key : activeKey;
+            //             currentIndex = item.data.key === activeKey ? index : currentIndex;
+            //             return {
+            //                 ...item.data
+            //             }
+            //         }
+            //     );
+            //     this.setData({
+            //         tabList: tab,
+            //         activeKey,
+            //         currentIndex
+            //     }, () => {
+            //         if (this.data.scrollable) {
+            //             this.queryMultipleNodes();
+            //         }
+            //     });
+            //
+            // }
         },
+
+        /***
+         * 处理变化
+         * @param e
+         */
         handleChange(e) {
             const activeKey = e.currentTarget.dataset.key;
             const currentIndex = e.currentTarget.dataset.index;
-            this._setChangeData({
+            this._setLocalData(activeKey, currentIndex);
+            this._setChangeData();
+        },
+
+        /**
+         * 刷新局部数据
+         * @param activeKey
+         * @param currentIndex
+         * @private
+         */
+        _setLocalData(activeKey, currentIndex) {
+            // local data
+            this.setData({
                 activeKey,
                 currentIndex
             });
         },
-
         /***
-         *
+         * 子组件传值给父组件
          * @param activeKey 当前激活选项卡的key
          * @param currentIndex 当前激活选项卡的索引
          * @private
          */
-        _setChangeData({
-                           activeKey,
-                           currentIndex
-                       }) {
-            this.setData({
+        _setChangeData() {
+            const activeKey = !this.data.activeKey ? '' : this.data.activeKey;
+            const currentIndex = !this.data.currentIndex ? 0 : this.data.currentIndex;
+            const data = this.data;
+            const props = this.props;
+            // sub 2 parent
+            this.props.onDataChange({
                 activeKey,
-                currentIndex
-            })
-        }
-
-
-    }
+                currentIndex,
+                data,
+                props
+            });
+            this.props.onSegmentData({
+                data,
+                props
+            });
+        },
+    },
 });

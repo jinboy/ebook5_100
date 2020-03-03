@@ -16,5 +16,10 @@
 <!--</t-segment>-->
 
 
-<t-segment onGetFromComponents="onGetFromComponents">
+<t-segment onDataChange="onDataChange" onSegmentData="onSegmentData">
+    <block a:for="{{roots}}">
+        123
+<!--        <t-segment-item key="{{item.id}}" tab="{{item.name}}" onSegmentItemData="onSegmentItemData"></t-segment-item>-->
+    </block>
 </t-segment>
+<!--<t-test extra="external extra" onCounterPlusOne="onCounterPlusOne"></t-test>-->

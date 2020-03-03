@@ -26,25 +26,29 @@ Component({
             type: String,
             value: 'overflow'
         },
+        onSegmentItemData: (e) => console.log('onSegmentItemData:', e),
     },
     didMount() {
+        this._setChangeData();
     },
     didUpdate() {
-        // function (filed) {
-        //
-        // }
+        this._setChangeData();
     },
     didUnmount() {
     },
     methods: {
+        /***
+         * 更新数据
+         * @param filed
+         */
         updateData(filed) {
-            let parent;
+            let parent;// 上级父组件
             if (!parent) return;
             const tabList = parent.data.tabList;
             if (!(tabList && tabList.length > 0)) return;
             const index = tabList.findIndex(tab => tab.key === this.data.key);
             tabList[index] = filed;
-            paerent.setData({
+            parent.setData({
                 tabList: tabList
 
             }, () => {
@@ -52,6 +56,20 @@ Component({
                     parent.queryMultipleNodes();
                 }
             })
-        }
-    }
+        },
+
+        _setChangeData() {
+            const data = this.data;
+            const props = this.props;
+            console.log('data:', data)
+            console.log('props:', props)
+            this.props.onSegmentItemData(
+                {
+                    data,
+                    props
+                }
+            );
+        },
+    },
+
 });

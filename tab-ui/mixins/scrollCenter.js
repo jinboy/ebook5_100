@@ -17,10 +17,16 @@ export default Behavior({
                 }).exec();
             });
         },
+        /***
+         *
+         * @param res
+         * @param currentIndex
+         * @param type
+         */
         queryScrollNode(res, currentIndex, type = 'width') {
             const currentRect = res[currentIndex];
 
-            this.getRect('.l-tabsscroll').then(_ => {
+            this.getRect('.t-tabsscroll').then(_ => {
                 const scrollWidth = _[type];
 
                 let transformDistance = res
@@ -42,12 +48,15 @@ export default Behavior({
                 }
             });
         },
+        /***
+         *
+         */
         queryMultipleNodes() {
             const {
                 placement,
                 currentIndex
             } = this.data;
-            this.getRect('.l-tabs-item', true)
+            this.getRect('.t-tabs-item', true)
                 .then((res) => {
                     if (['top', 'bottom'].indexOf(placement) !== -1) {
                         this.queryScrollNode(res, currentIndex);

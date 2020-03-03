@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "t-segment": "/tab-ui/segment/segment"
+    "t-segment": "/tab-ui/segment/segment",
+    "t-segment-item": "/tab-ui/segment-item/segment-item",
+    "t-test": "/tab-ui/test/test"
   }
 }
